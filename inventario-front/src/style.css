@@ -1,0 +1,234 @@
+/* ===== Variables ===== */
+:root {
+  --fondo: #f6f4ef;
+  --panel: #ffffff;
+  --borde: #e7e3da;
+  --texto: #23211d;
+  --suave: #77726a;
+  --acento: #0f766e;
+  --acento-oscuro: #0b5d57;
+  --acento-claro: #e3f2ef;
+  --peligro: #b42318;
+  --aviso: #b45309;
+  --radio: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+h1, h2, h3 { margin: 0; }
+
+/* ===== Layout ===== */
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--borde);
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.marca { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; padding: 0 8px; }
+.marca .logo {
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  background: var(--acento); color: #fff;
+  border-radius: 10px; font-size: 20px;
+}
+.marca strong { display: block; font-size: 16px; }
+.marca small { color: var(--suave); font-size: 12px; }
+
+.menu { display: flex; flex-direction: column; gap: 4px; }
+.menu button {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 10px 12px;
+  border: none; background: none; border-radius: 8px;
+  font-size: 14px; color: var(--suave); text-align: left; cursor: pointer;
+}
+.menu button:hover { background: var(--fondo); color: var(--texto); }
+.menu button.activo { background: var(--acento-claro); color: var(--acento-oscuro); font-weight: 600; }
+
+.pagina { flex: 1; padding: 32px 40px; max-width: 1200px; }
+
+.encabezado { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
+.encabezado h1 { font-size: 26px; }
+.sub { margin: 4px 0 0; color: var(--suave); font-size: 14px; }
+
+/* ===== Controles ===== */
+.btn {
+  padding: 8px 14px;
+  border: 1px solid var(--borde);
+  background: var(--panel);
+  border-radius: 8px;
+  font-size: 14px; cursor: pointer;
+  color: var(--texto);
+}
+.btn:hover { background: var(--fondo); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.principal { background: var(--acento); border-color: var(--acento); color: #fff; font-weight: 600; }
+.btn.principal:hover:not(:disabled) { background: var(--acento-oscuro); }
+.btn.grande { width: 100%; padding: 12px; font-size: 16px; }
+.btn.texto-peligro { color: var(--peligro); }
+
+input {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+}
+input:focus { outline: 2px solid var(--acento-claro); border-color: var(--acento); }
+
+.buscador { max-width: 320px; margin-bottom: 18px; }
+
+.aviso { padding: 10px 14px; border-radius: 8px; font-size: 14px; margin: 0 0 16px; }
+.aviso.ok { background: var(--acento-claro); color: var(--acento-oscuro); }
+.aviso.error { background: #fdecea; color: var(--peligro); }
+
+.vacio { color: var(--suave); text-align: center; padding: 20px; font-size: 14px; }
+
+/* ===== Productos: tarjetas ===== */
+.rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+
+.tarjeta {
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.tarjeta-top { display: flex; justify-content: space-between; align-items: center; }
+.tarjeta .id { color: var(--suave); font-size: 12px; }
+.tarjeta h3 { font-size: 15px; font-weight: 600; min-height: 38px; }
+.tarjeta .precio { margin: 0; font-size: 20px; font-weight: 700; }
+.tarjeta-acciones { display: flex; gap: 8px; margin-top: 8px; }
+.tarjeta-acciones .btn { flex: 1; }
+
+.chip { font-size: 12px; padding: 3px 8px; border-radius: 999px; font-weight: 600; }
+.chip.ok { background: var(--acento-claro); color: var(--acento-oscuro); }
+.chip.bajo { background: #fef3c7; color: var(--aviso); }
+.chip.agotado { background: #fdecea; color: var(--peligro); }
+
+/* ===== Modal ===== */
+.fondo-modal {
+  position: fixed; inset: 0;
+  background: rgba(35, 33, 29, .45);
+  display: grid; place-items: center;
+  padding: 16px;
+}
+.modal {
+  background: var(--panel);
+  border-radius: var(--radio);
+  padding: 24px;
+  width: 100%; max-width: 420px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.modal h2 { font-size: 18px; }
+.modal label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--suave); }
+.dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.modal-acciones { display: flex; justify-content: flex-end; gap: 8px; }
+.modal .aviso { margin: 0; }
+
+/* ===== Punto de venta ===== */
+.pos { display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start; }
+
+.catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+
+.producto {
+  display: flex; flex-direction: column; gap: 4px;
+  text-align: left;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 14px;
+  cursor: pointer;
+  transition: border-color .15s, transform .15s;
+}
+.producto:hover:not(:disabled) { border-color: var(--acento); transform: translateY(-2px); }
+.producto:disabled { opacity: .45; cursor: not-allowed; }
+.producto .nombre { font-size: 14px; font-weight: 600; color: var(--texto); }
+.producto .precio { font-size: 17px; font-weight: 700; color: var(--acento-oscuro); }
+.producto .stock { font-size: 12px; color: var(--suave); }
+
+.ticket {
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: sticky; top: 20px;
+}
+.ticket h2 { font-size: 16px; }
+
+.lineas { list-style: none; margin: 0; padding: 0; }
+.lineas li {
+  display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--borde);
+}
+.lineas .nombre { display: block; font-size: 14px; }
+.lineas small { color: var(--suave); font-size: 12px; }
+.lineas .importe { font-weight: 600; font-size: 14px; min-width: 80px; text-align: right; }
+
+.contador { display: flex; align-items: center; gap: 6px; }
+.contador button {
+  width: 26px; height: 26px;
+  border: 1px solid var(--borde); background: var(--fondo);
+  border-radius: 6px; cursor: pointer; font-size: 15px;
+}
+.contador span { min-width: 18px; text-align: center; font-weight: 600; }
+
+.total {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 8px 0;
+}
+.total span { color: var(--suave); font-size: 14px; }
+.total strong { font-size: 24px; }
+
+/* ===== Historial ===== */
+.historial { margin-top: 36px; }
+.historial h2 { font-size: 18px; margin-bottom: 12px; }
+
+.venta {
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  margin-bottom: 8px;
+}
+.venta summary {
+  display: grid; grid-template-columns: 60px 1fr auto auto; gap: 16px; align-items: center;
+  padding: 14px 18px;
+  cursor: pointer; list-style: none;
+}
+.venta summary::-webkit-details-marker { display: none; }
+.venta[open] summary { border-bottom: 1px solid var(--borde); }
+.venta .folio { font-weight: 700; color: var(--acento-oscuro); }
+.venta .fecha, .venta .resumen { color: var(--suave); font-size: 14px; }
+
+.venta table { width: calc(100% - 36px); margin: 12px 18px; border-collapse: collapse; font-size: 14px; }
+.venta th { text-align: left; font-size: 12px; color: var(--suave); font-weight: 600; padding: 6px 0; }
+.venta td { padding: 6px 0; border-top: 1px solid var(--fondo); }
+.venta th:not(:first-child), .venta td:not(:first-child) { text-align: right; }
+.venta-acciones { display: flex; justify-content: flex-end; gap: 8px; padding: 0 18px 14px; }
+
+/* ===== Pantallas chicas ===== */
+@media (max-width: 860px) {
+  .app { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: static; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; }
+  .marca { margin: 0; }
+  .menu { flex-direction: row; }
+  .pagina { padding: 20px 16px; }
+  .pos { grid-template-columns: 1fr; }
+  .ticket { position: static; }
+}
